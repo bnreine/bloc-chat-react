@@ -24,7 +24,7 @@ class App extends Component {
           <h1 className="App-title">Bloc Chat React</h1>
         </header>
         <p className="App-intro">
-          
+
         </p>
         <RoomList firebase={firebase} test={2+1} />
       </div>
