@@ -38,6 +38,7 @@ class RoomList extends Component {
   render() {
     return(
       <div>
+<<<<<<< HEAD
         {this.state.rooms.map( room => <div>{room.name}</div> )}
 
         <form onSubmit={(e) => this.createRoom(e)} >
@@ -50,6 +51,9 @@ class RoomList extends Component {
           </div>
         </form>
 
+=======
+        {this.state.rooms.map( (room, index) => <div key={index}>{room.name}</div> )}
+>>>>>>> checkpoint-list-chat-rooms
       </div>
     )
   }
