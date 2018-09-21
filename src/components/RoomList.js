@@ -38,11 +38,11 @@ class RoomList extends Component {
   render() {
     return(
       <div>
-        {this.state.rooms.map( room => <div>{room.name}</div> )}
+        {this.state.rooms.map( (room, index) => <div key={index}>{room.name}</div> )}
 
         <form onSubmit={(e) => this.createRoom(e)} >
           <div>
-            <label for="name">Enter new chat room name: </label>
+            <label htmlFor="name">Enter new chat room name: </label>
             <input type="text" name="name" value={ this.state.nextRoom } onChange={ (e) => this.handleChange(e)} />
           </div>
           <div>

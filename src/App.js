@@ -25,7 +25,7 @@ class App extends Component {
         <p className="App-intro">
 
         </p>
-        <RoomList firebase={firebase} test={2+1} />
+        <RoomList firebase={firebase} />
       </div>
     );
   }
