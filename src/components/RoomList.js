@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MessageList from './MessageList';
+
 
 class RoomList extends Component {
   constructor(props) {
@@ -9,6 +9,8 @@ class RoomList extends Component {
       nextRoom:''
     };
     this.roomsRef=this.props.firebase.database().ref('rooms');
+    //this.handleClick=this.handleClick.bind(this);
+    //console.log(this.props.activeRoomRef.key);
   }
 
   componentDidMount() {
@@ -19,7 +21,7 @@ class RoomList extends Component {
     });
   }
 
-  handleChange(e) {
+  handleTextChange(e) {
     this.setState({ nextRoom: e.target.value })
   }
 
@@ -35,22 +37,39 @@ class RoomList extends Component {
   }
 
 
+
+  //handles click event on room list item
+  //results:
+  //  1. Turns clicked item blue
+  //  2. Calls handleRoomChange callback from props (via app component)
+  handleClick(e, activeKey) {
+    e.preventDefault();
+    if (activeKey === this.props.activeRoomRef.key) {
+      return;
+    } else {
+      
+      this.props.handleRoomChange(activeKey); //works!
+      e.target.style.color='blue';  //works!
+    }
+  }
+
+
   render() {
     return(
       <div>
-        {this.state.rooms.map( (room, index) => <div key={index}>{room.name}</div> )}
+        {this.state.rooms.map( (room, index) => <div key={this.state.rooms[index].key} onClick={ (e) => this.handleClick(e, this.state.rooms[index].key) } >{room.name} key: {this.state.rooms[index].key}</div> )}
 
         <form onSubmit={(e) => this.createRoom(e)} >
           <div>
             <label htmlFor="name">Enter new chat room name: </label>
-            <input type="text" name="name" value={ this.state.nextRoom } onChange={ (e) => this.handleChange(e)} />
+            <input type="text" name="name" value={ this.state.nextRoom } onChange={ (e) => this.handleTextChange(e)} />
           </div>
           <div>
             <input type="submit"/>
           </div>
         </form>
 
-        <MessageList firebase={this.props.firebase} />
+
 
       </div>
     )
