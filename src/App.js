@@ -20,18 +20,17 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      activeRoomRef: {Ref: "Default", key: "Default Key"},
-      prevRoomRef: {}
+      activeRoomRef: {key: 'Default'}
     }
-    //this.handleRoomChange=this.handleRoomChange.bind(this);
   }
 
   handleRoomChange(activeKey){
     const newActiveRoomRef = firebase.database().ref(activeKey);
-    this.setState( state => ({ activeRoomRef: newActiveRoomRef, prevRoomRef: this.state.activeRoomRef }));
-    console.log(this.state.activeRoomRef.key); //this is one step behind because setState doesn't happen until after this function block
-    console.log(this.state.prevRoomRef.key); //also one step behind
+    this.setState({ activeRoomRef: newActiveRoomRef });
   }
+
+
+
 
 
   render() {
@@ -50,7 +49,7 @@ class App extends Component {
 
         <aside>
           <br/>
-          <RoomList firebase={firebase} activeRoomRef={this.state.activeRoomRef} prevRoomRef={this.state.prevRoomRef} handleRoomChange={(aKey) => this.handleRoomChange(aKey)} />
+          <RoomList firebase={firebase} activeRoomRef={this.state.activeRoomRef} handleRoomChange={(aKey) => this.handleRoomChange(aKey)} />
         </aside>
       </div>
     );
