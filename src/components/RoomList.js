@@ -65,7 +65,7 @@ class RoomList extends Component {
       <div>
         {this.state.rooms.map( (room, index) =>
           <div style={this.activeColor(room)} key={this.state.rooms[index].key} onClick={ (e) => this.handleClick(e, this.state.rooms[index].key) } >
-            {room.name} key: {this.state.rooms[index].key}
+            {room.name}
           </div>
           )
         }

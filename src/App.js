@@ -27,7 +27,6 @@ class App extends Component {
   handleRoomChange(activeKey){
     const newActiveRoomRef = firebase.database().ref(activeKey);
     this.setState({ activeRoomRef: newActiveRoomRef });
-    //call a callback function here.
   }
 
 
