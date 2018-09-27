@@ -5,7 +5,8 @@ class MessageList extends Component {
     super(props);
     this.state={
       messages:[],
-      activeRoomTitle: ''
+      activeRoomTitle: '',
+      nextMessage: ''
     };
     this.messagesRef=this.props.firebase.database().ref('messages');
   }
@@ -37,6 +38,42 @@ class MessageList extends Component {
   }
 
 
+  handleTextChange(e) {
+    this.setState({ nextMessage: e.target.value })
+  }
+
+  createMessage(e) {
+    e.preventDefault();
+    if (!this.state.nextMessage) { return }
+    const nextMessageEntry = this.state.nextMessage;
+    this.setState({ nextMessage: '' });
+    this.messagesRef.push({
+      'content': nextMessageEntry,
+      'roomId': this.props.activeRoomRef.key,
+      'sentAt':this.props.firebase.database.ServerValue.TIMESTAMP,
+      'username':this.props.user.displayName
+    });
+  }
+
+
+  showForm() {
+    return (
+
+      <form onSubmit={(e) => this.createMessage(e)}>
+        <div>
+          <label htmlFor="name">Message</label>
+          <input type="text" name="name" value={ this.state.nextMessage } onChange={ (e) => this.handleTextChange(e)} />
+        </div>
+        <div>
+          <input type="submit" value="Send"/>
+        </div>
+      </form>
+
+
+    )
+  }
+
+
   render() {
 
 
@@ -44,6 +81,10 @@ class MessageList extends Component {
       <div>
         <div>
           {this.roomTitle()}
+        </div>
+
+        <div>
+          {((this.props.activeRoomRef.key !== 'Default') && (this.props.user)) ? this.showForm() : ''}
         </div>
 
         <div>

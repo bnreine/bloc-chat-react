@@ -26,6 +26,9 @@ class App extends Component {
     }
   }
 
+
+
+
   handleRoomChange(activeKey){
     const newActiveRoomRef = firebase.database().ref(activeKey);
     this.setState({ activeRoomRef: newActiveRoomRef });
@@ -51,7 +54,7 @@ class App extends Component {
         </p>
 
         <main>
-          <MessageList firebase={firebase} activeRoomRef={this.state.activeRoomRef} />
+          <MessageList firebase={firebase} user={this.state.user} activeRoomRef={this.state.activeRoomRef} />
         </main>
 
         <aside>
