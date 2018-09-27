@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-
 import './App.css';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
+import MessageList from './components/MessageList';
 
 
 var config = {
@@ -17,6 +17,22 @@ firebase.initializeApp(config);
 
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      activeRoomRef: {key: 'Default'}
+    }
+  }
+
+  handleRoomChange(activeKey){
+    const newActiveRoomRef = firebase.database().ref(activeKey);
+    this.setState({ activeRoomRef: newActiveRoomRef });
+  }
+
+
+
+
+
   render() {
     return (
       <div className="App">
@@ -26,7 +42,15 @@ class App extends Component {
         <p className="App-intro">
 
         </p>
-        <RoomList firebase={firebase} />
+
+        <main>
+          <MessageList firebase={firebase} activeRoomRef={this.state.activeRoomRef} />
+        </main>
+
+        <aside>
+          <br/>
+          <RoomList firebase={firebase} activeRoomRef={this.state.activeRoomRef} handleRoomChange={(aKey) => this.handleRoomChange(aKey)} />
+        </aside>
       </div>
     );
   }
