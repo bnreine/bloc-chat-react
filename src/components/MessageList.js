@@ -24,17 +24,18 @@ class MessageList extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if ((this.props.activeRoomRef.key !== "Default") && (this.props.activeRoomRef.key !== prevProps.activeRoomRef.key)) {
       this.props.firebase.database().ref('rooms').once("value", snapshot => {
-        const roomTitleTest = snapshot.child(this.props.activeRoomRef.key).val().name;
-        this.setState({activeRoomTitle: roomTitleTest});
+        const roomTitle = snapshot.child(this.props.activeRoomRef.key).val().name;
+        this.setState({activeRoomTitle: roomTitle});
       })
     }
   }
 
 
-  roomTitle() {
-    const roomTitleValue = this.state.activeRoomTitle !== '' ? this.state.activeRoomTitle : '';
-    const titleValue = this.state.activeRoomTitle !== '' ? 'Title: ' : '';
-    return (titleValue + roomTitleValue)
+  displayRoomTitle() {
+    const activeRoomTitle = this.state.activeRoomTitle;
+    const roomTitle = activeRoomTitle !== '' ? activeRoomTitle : '';
+    const titleLabel = activeRoomTitle !== '' ? 'Title: ' : '';
+    return (titleLabel + roomTitle)
   }
 
 
@@ -80,7 +81,7 @@ class MessageList extends Component {
     return(
       <div>
         <div>
-          {this.roomTitle()}
+          {this.displayRoomTitle()}
         </div>
 
         <div>

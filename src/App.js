@@ -49,9 +49,6 @@ class App extends Component {
           <h1 className="App-title">Bloc Chat React</h1>
           <User firebase={firebase} user={this.state.user} setUser={(user) => this.setUser(user)}/>
         </header>
-        <p className="App-intro">
-
-        </p>
 
         <main>
           <MessageList firebase={firebase} user={this.state.user} activeRoomRef={this.state.activeRoomRef} />
