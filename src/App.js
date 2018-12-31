@@ -56,6 +56,7 @@ class App extends Component {
 
         <aside>
           <br/>
+          <h3>Click on a room to see messages</h3>
           <RoomList firebase={firebase} activeRoomRef={this.state.activeRoomRef} handleRoomChange={(aKey) => this.handleRoomChange(aKey)} />
         </aside>
       </div>
