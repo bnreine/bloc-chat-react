@@ -46,7 +46,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Bloc Chat React</h1>
+          <h1 className="App-title">Chat Room</h1>
           <User firebase={firebase} user={this.state.user} setUser={(user) => this.setUser(user)}/>
         </header>
 

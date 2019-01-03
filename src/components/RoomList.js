@@ -66,8 +66,6 @@ class RoomList extends Component {
           )
         }
 
-
-
         <form onSubmit={(e) => this.createRoom(e)} >
           <div>
             <label htmlFor="name">Enter new chat room name: </label>
